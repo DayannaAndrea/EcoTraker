@@ -1,0 +1,15 @@
+# Entorno virtual de Python
+backend/venv/
+
+# Variables de entorno
+.env
+
+# Archivos de Python
+__pycache__/
+*.pyc
+
+# Base de datos local de Django
+db.sqlite3
+
+# Base de datos SQLite generada accidentalmente
+backend/ecotracker
