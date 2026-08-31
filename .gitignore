@@ -13,3 +13,28 @@ db.sqlite3
 
 # Base de datos SQLite generada accidentalmente
 backend/ecotracker
+# Entorno virtual de Python
+backend/venv/
+
+# Variables de entorno
+.env
+
+# Archivos de Python
+__pycache__/
+*.pyc
+
+# Base de datos local de Django
+db.sqlite3
+
+# Base de datos SQLite generada accidentalmente
+backend/ecotracker
+
+# Dependencias y archivos generados de Expo
+mobile/node_modules/
+mobile/.expo/
+mobile/.expo-shared/
+mobile/dist/
+mobile/web-build/
+
+# Dependencias de Node en cualquier ubicación
+node_modules/
