@@ -1,0 +1,22 @@
+export const colors = {
+  night: "#071614",
+  nightSoft: "#0B201B",
+  panel: "#102720",
+  panelSoft: "#143229",
+  surface: "#17382E",
+  surfaceLight: "#1D4639",
+  mint: "#83E6B1",
+  mintStrong: "#49C986",
+  mintSoft: "#B9F3D2",
+  lavender: "#A99BFF",
+  blue: "#79B7FF",
+  gold: "#E8C77A",
+  text: "#F3FAF6",
+  textSoft: "#B4C5BD",
+  textMuted: "#789087",
+  border: "rgba(174, 228, 204, 0.13)",
+  white10: "rgba(255,255,255,0.06)",
+  white15: "rgba(255,255,255,0.10)",
+  white20: "rgba(255,255,255,0.14)",
+  danger: "#FF8B98"
+};
