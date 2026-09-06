@@ -88,7 +88,7 @@ export default function LoginScreen({ navigation }) {
                     <TextInput
                       style={styles.input}
                       placeholder="nombre@correo.com"
-                      placeholderTextColor="#6F8078"
+                      placeholderTextColor={colors.textMuted}
                       keyboardType="email-address"
                       autoCapitalize="none"
                       onFocus={() => setFocused("email")}
@@ -107,7 +107,7 @@ export default function LoginScreen({ navigation }) {
                     <TextInput
                       style={styles.input}
                       placeholder="••••••••"
-                      placeholderTextColor="#6F8078"
+                      placeholderTextColor={colors.textMuted}
                       secureTextEntry={secure}
                       onFocus={() => setFocused("password")}
                       onBlur={() => setFocused("")}
@@ -128,7 +128,7 @@ export default function LoginScreen({ navigation }) {
                       styles.primaryButton,
                       pressed && styles.primaryButtonPressed
                     ]}
-                    onPress={() => { clearWebFocus(); navigation.navigate("FoodRegister"); }}
+                    onPress={() => { clearWebFocus(); navigation.navigate("Home"); }}
                   >
                     <View>
                       <Text style={styles.primaryEyebrow}>CONTINUAR</Text>
@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
   },
   shell: {
     width: "100%",
+    backgroundColor: "transparent",
     maxWidth: 700,
     alignSelf: "center"
   },
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "rgba(10,27,22,0.7)",
+    backgroundColor: colors.cocoa,
     borderWidth: 1,
     borderColor: colors.border
   },
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.mint
   },
   statusText: {
-    color: "#81A796",
+    color: colors.gold,
     fontSize: 6.5,
     fontWeight: "900",
     letterSpacing: 0.8
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4
   },
   title: {
-    color: colors.text,
+    color: colors.cream,
     fontSize: 43,
     lineHeight: 47,
     fontWeight: "900",
@@ -249,10 +250,10 @@ const styles = StyleSheet.create({
     lineHeight: 66
   },
   accent: {
-    color: colors.mint
+    color: colors.accent
   },
   description: {
-    color: "#AFC0B8",
+    color: colors.textSoft,
     fontSize: 13.2,
     lineHeight: 21.5,
     maxWidth: 520,
@@ -264,7 +265,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
     padding: 18,
     borderRadius: 19,
-    backgroundColor: "rgba(10,29,23,0.62)",
+    backgroundColor: colors.cocoa,
     borderWidth: 1,
     borderColor: colors.border
   },
@@ -277,19 +278,19 @@ const styles = StyleSheet.create({
     paddingLeft: 12
   },
   statementKicker: {
-    color: "#70A68C",
+    color: colors.gold,
     fontSize: 7,
     fontWeight: "900",
     letterSpacing: 1.3
   },
   statementTitle: {
-    color: "#E2EFE8",
+    color: colors.cream,
     fontSize: 13,
     fontWeight: "900",
     marginTop: 5
   },
   statementText: {
-    color: "#7C9489",
+    color: colors.textMuted,
     fontSize: 10,
     marginTop: 4
   },
@@ -303,20 +304,20 @@ const styles = StyleSheet.create({
     width: 34,
     height: 2,
     borderRadius: 2,
-    backgroundColor: "#68C896"
+    backgroundColor: colors.primary
   },
   lineLong: {
     width: 80,
     height: 1,
-    backgroundColor: "rgba(131,230,177,0.2)"
+    backgroundColor: colors.primaryDark
   },
   card: {
     width: "100%",
     padding: 25,
     borderRadius: 29,
-    backgroundColor: "rgba(8,24,20,0.93)",
+    backgroundColor: colors.panel,
     borderWidth: 1,
-    borderColor: "rgba(164,221,198,0.13)"
+    borderColor: colors.border
   },
   cardDesktop: {
     width: 470,
@@ -332,12 +333,12 @@ const styles = StyleSheet.create({
     marginTop: 7
   },
   cardSubtitle: {
-    color: "#738980",
+    color: colors.textMuted,
     fontSize: 10.5,
     marginTop: 4
   },
   label: {
-    color: "#789087",
+    color: colors.textMuted,
     fontSize: 7.7,
     fontWeight: "900",
     letterSpacing: 1.1,
@@ -358,14 +359,14 @@ const styles = StyleSheet.create({
     height: 55,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: "rgba(164,221,198,0.1)",
-    backgroundColor: "rgba(255,255,255,0.035)",
+    borderColor: colors.border,
+    backgroundColor: colors.white10,
     flexDirection: "row",
     alignItems: "center"
   },
   inputFocused: {
-    borderColor: "rgba(131,230,177,0.55)",
-    backgroundColor: "rgba(255,255,255,0.055)"
+    borderColor: colors.primary,
+    backgroundColor: colors.white15
   },
   input: {
     flex: 1,
@@ -377,7 +378,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12
   },
   showText: {
-    color: "#7EA992",
+    color: colors.gold,
     fontSize: 7,
     fontWeight: "900"
   },
@@ -394,13 +395,13 @@ const styles = StyleSheet.create({
   },
   primaryButtonPressed: { opacity: 0.9 },
   primaryEyebrow: {
-    color: "#317456",
+    color: colors.primaryDark,
     fontSize: 6.8,
     fontWeight: "900",
     letterSpacing: 1.2
   },
   primaryText: {
-    color: "#062017",
+    color: colors.cocoa,
     fontSize: 13,
     fontWeight: "900",
     marginTop: 2
@@ -409,12 +410,12 @@ const styles = StyleSheet.create({
     width: 41,
     height: 41,
     borderRadius: 13,
-    backgroundColor: "rgba(2,43,28,0.16)",
+    backgroundColor: colors.primary18,
     alignItems: "center",
     justifyContent: "center"
   },
   arrow: {
-    color: "#062017",
+    color: colors.cocoa,
     fontSize: 20,
     fontWeight: "900"
   },
@@ -427,10 +428,10 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: "rgba(190,222,209,0.1)"
+    backgroundColor: colors.gold12
   },
   dividerText: {
-    color: "#6E837B",
+    color: colors.textMuted,
     fontSize: 6.7,
     fontWeight: "900",
     letterSpacing: 1
@@ -439,13 +440,13 @@ const styles = StyleSheet.create({
     height: 52,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: "rgba(131,230,177,0.21)",
-    backgroundColor: "rgba(131,230,177,0.035)",
+    borderColor: colors.primary,
+    backgroundColor: colors.primary10,
     alignItems: "center",
     justifyContent: "center"
   },
   secondaryText: {
-    color: "#B1DBC4",
+    color: colors.textSoft,
     fontSize: 11.5,
     fontWeight: "900"
   },
@@ -459,7 +460,7 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     borderRadius: 5,
-    backgroundColor: "rgba(131,230,177,0.08)",
+    backgroundColor: colors.primary10,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -468,11 +469,11 @@ const styles = StyleSheet.create({
     height: 7,
     borderRadius: 2.5,
     borderWidth: 1,
-    borderColor: "#6DA889"
+    borderColor: colors.primary
   },
   secureText: {
     flex: 1,
-    color: "#687A72",
+    color: colors.textMuted,
     fontSize: 7.8,
     lineHeight: 12
   },
@@ -483,7 +484,7 @@ const styles = StyleSheet.create({
     gap: 9
   },
   footerText: {
-    color: "#6B8177",
+    color: colors.textMuted,
     fontSize: 6.6,
     fontWeight: "900",
     letterSpacing: 1
@@ -491,6 +492,6 @@ const styles = StyleSheet.create({
   footerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: "rgba(133,170,152,0.13)"
+    backgroundColor: colors.border
   }
 });

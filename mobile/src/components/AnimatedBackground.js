@@ -3,159 +3,73 @@ import { Animated, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../theme/colors";
 
-export default function AnimatedBackground({ variant = "default", children }) {
-  const mintX = useRef(new Animated.Value(0)).current;
-  const mintY = useRef(new Animated.Value(0)).current;
-  const purpleX = useRef(new Animated.Value(0)).current;
-  const purpleY = useRef(new Animated.Value(0)).current;
-  const blueX = useRef(new Animated.Value(0)).current;
-  const blueY = useRef(new Animated.Value(0)).current;
+export default function AnimatedBackground({ children }) {
+  const a = useRef(new Animated.Value(0)).current;
+  const b = useRef(new Animated.Value(0)).current;
+  const c = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const loops = [
-      Animated.loop(
-        Animated.sequence([
-          Animated.parallel([
-            Animated.timing(mintX, { toValue: 34, duration: 5200, useNativeDriver: false }),
-            Animated.timing(mintY, { toValue: 24, duration: 5200, useNativeDriver: false })
-          ]),
-          Animated.parallel([
-            Animated.timing(mintX, { toValue: -10, duration: 4600, useNativeDriver: false }),
-            Animated.timing(mintY, { toValue: 0, duration: 4600, useNativeDriver: false })
-          ]),
-          Animated.parallel([
-            Animated.timing(mintX, { toValue: 0, duration: 4000, useNativeDriver: false }),
-            Animated.timing(mintY, { toValue: 0, duration: 4000, useNativeDriver: false })
-          ])
-        ])
-      ),
-      Animated.loop(
-        Animated.sequence([
-          Animated.parallel([
-            Animated.timing(purpleX, { toValue: -30, duration: 6500, useNativeDriver: false }),
-            Animated.timing(purpleY, { toValue: -22, duration: 6500, useNativeDriver: false })
-          ]),
-          Animated.parallel([
-            Animated.timing(purpleX, { toValue: 18, duration: 5600, useNativeDriver: false }),
-            Animated.timing(purpleY, { toValue: 10, duration: 5600, useNativeDriver: false })
-          ]),
-          Animated.parallel([
-            Animated.timing(purpleX, { toValue: 0, duration: 4400, useNativeDriver: false }),
-            Animated.timing(purpleY, { toValue: 0, duration: 4400, useNativeDriver: false })
-          ])
-        ])
-      ),
-      Animated.loop(
-        Animated.sequence([
-          Animated.parallel([
-            Animated.timing(blueX, { toValue: -22, duration: 5800, useNativeDriver: false }),
-            Animated.timing(blueY, { toValue: 26, duration: 5800, useNativeDriver: false })
-          ]),
-          Animated.parallel([
-            Animated.timing(blueX, { toValue: 25, duration: 6000, useNativeDriver: false }),
-            Animated.timing(blueY, { toValue: -15, duration: 6000, useNativeDriver: false })
-          ]),
-          Animated.parallel([
-            Animated.timing(blueX, { toValue: 0, duration: 4200, useNativeDriver: false }),
-            Animated.timing(blueY, { toValue: 0, duration: 4200, useNativeDriver: false })
-          ])
-        ])
-      )
+      Animated.loop(Animated.sequence([
+        Animated.timing(a, { toValue: 1, duration: 11000, useNativeDriver: false }),
+        Animated.timing(a, { toValue: 0, duration: 11000, useNativeDriver: false })
+      ])),
+      Animated.loop(Animated.sequence([
+        Animated.timing(b, { toValue: 1, duration: 14000, useNativeDriver: false }),
+        Animated.timing(b, { toValue: 0, duration: 14000, useNativeDriver: false })
+      ])),
+      Animated.loop(Animated.sequence([
+        Animated.timing(c, { toValue: 1, duration: 12500, useNativeDriver: false }),
+        Animated.timing(c, { toValue: 0, duration: 12500, useNativeDriver: false })
+      ]))
     ];
-
     loops.forEach(loop => loop.start());
-
     return () => {
       loops.forEach(loop => loop.stop());
-      [mintX, mintY, purpleX, purpleY, blueX, blueY].forEach(value => value.stopAnimation());
+      [a, b, c].forEach(value => value.stopAnimation());
     };
-  }, [mintX, mintY, purpleX, purpleY, blueX, blueY]);
+  }, [a, b, c]);
+
+  const ax = a.interpolate({ inputRange: [0, 1], outputRange: [-18, 30] });
+  const ay = a.interpolate({ inputRange: [0, 1], outputRange: [-8, 25] });
+  const bx = b.interpolate({ inputRange: [0, 1], outputRange: [20, -28] });
+  const by = b.interpolate({ inputRange: [0, 1], outputRange: [18, -22] });
+  const cx = c.interpolate({ inputRange: [0, 1], outputRange: [12, -18] });
+  const cy = c.interpolate({ inputRange: [0, 1], outputRange: [-18, 22] });
 
   return (
     <View style={styles.root}>
       <LinearGradient
-        colors={
-          variant === "login"
-            ? [colors.night, "#0C211B", "#16233A"]
-            : ["#071613", "#0C201B", "#111E2C"]
-        }
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+        colors={[colors.background, colors.backgroundSoft, colors.surface, colors.primaryDark]}
+        start={{ x: 0, y: 0.12 }}
+        end={{ x: 1, y: 0.88 }}
         style={StyleSheet.absoluteFill}
       />
-
-      <Animated.View
-        style={[
-          styles.noPointer,
-          styles.glowMint,
-          { transform: [{ translateX: mintX }, { translateY: mintY }, { scale: 1.04 }] }
-        ]}
+      <LinearGradient
+        colors={["rgba(15,33,24,0)", "rgba(15,33,24,0.18)", "rgba(15,33,24,0.62)"]}
+        start={{ x: 0, y: 0.5 }}
+        end={{ x: 1, y: 0.5 }}
+        style={StyleSheet.absoluteFill}
       />
-
-      <Animated.View
-        style={[
-          styles.noPointer,
-          styles.glowPurple,
-          { transform: [{ translateX: purpleX }, { translateY: purpleY }, { scale: 1.05 }] }
-        ]}
+      <LinearGradient
+        colors={["rgba(244,241,222,0.05)", "rgba(244,241,222,0)", "rgba(15,33,24,0.24)"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={StyleSheet.absoluteFill}
       />
-
-      <Animated.View
-        style={[
-          styles.noPointer,
-          styles.glowBlue,
-          { transform: [{ translateX: blueX }, { translateY: blueY }, { scale: 1.03 }] }
-        ]}
-      />
-
-      <View style={[styles.noPointer, styles.grain]} />
+      <Animated.View style={[styles.noPointer, styles.orb, styles.one, { transform: [{ translateX: ax }, { translateY: ay }] }]} />
+      <Animated.View style={[styles.noPointer, styles.orb, styles.two, { transform: [{ translateX: bx }, { translateY: by }] }]} />
+      <Animated.View style={[styles.noPointer, styles.orb, styles.three, { transform: [{ translateX: cx }, { translateY: cy }] }]} />
       {children}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: colors.night,
-    overflow: "hidden"
-  },
-  noPointer: {
-    pointerEvents: "none"
-  },
-  glowMint: {
-    position: "absolute",
-    width: 430,
-    height: 430,
-    borderRadius: 215,
-    backgroundColor: "#155542",
-    opacity: 0.28,
-    top: -235,
-    left: -175
-  },
-  glowPurple: {
-    position: "absolute",
-    width: 390,
-    height: 390,
-    borderRadius: 195,
-    backgroundColor: "#40306F",
-    opacity: 0.21,
-    bottom: -240,
-    right: -170
-  },
-  glowBlue: {
-    position: "absolute",
-    width: 250,
-    height: 250,
-    borderRadius: 125,
-    backgroundColor: "#1C496C",
-    opacity: 0.16,
-    top: "38%",
-    right: -180
-  },
-  grain: {
-    ...StyleSheet.absoluteFillObject,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.015)"
-  }
+  noPointer: { pointerEvents: "none" },
+  root: { flex: 1, backgroundColor: colors.primary, overflow: "hidden" },
+  orb: { position: "absolute", borderRadius: 999 },
+  one: { width: 360, height: 360, top: -220, left: -150, backgroundColor: colors.cream, opacity: 0.12 },
+  two: { width: 440, height: 440, bottom: -280, right: -180, backgroundColor: colors.cocoa, opacity: 0.26 },
+  three: { width: 230, height: 230, top: "42%", right: -150, backgroundColor: colors.gold, opacity: 0.10 }
 });

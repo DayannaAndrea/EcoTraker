@@ -87,7 +87,7 @@ export default function RegisterScreen({ navigation }) {
                     <TextInput
                       style={styles.input}
                       placeholder="Nombre y apellido"
-                      placeholderTextColor="#6F8078"
+                      placeholderTextColor={colors.textMuted}
                       onFocus={() => setFocused("name")}
                       onBlur={() => setFocused("")}
                     />
@@ -98,7 +98,7 @@ export default function RegisterScreen({ navigation }) {
                     <TextInput
                       style={styles.input}
                       placeholder="correo@ejemplo.com"
-                      placeholderTextColor="#6F8078"
+                      placeholderTextColor={colors.textMuted}
                       keyboardType="email-address"
                       autoCapitalize="none"
                       onFocus={() => setFocused("email")}
@@ -111,7 +111,7 @@ export default function RegisterScreen({ navigation }) {
                     <TextInput
                       style={styles.input}
                       placeholder="Mínimo 6 caracteres"
-                      placeholderTextColor="#6F8078"
+                      placeholderTextColor={colors.textMuted}
                       secureTextEntry={secure}
                       onFocus={() => setFocused("password")}
                       onBlur={() => setFocused("")}
@@ -126,7 +126,7 @@ export default function RegisterScreen({ navigation }) {
                     <TextInput
                       style={styles.input}
                       placeholder="Repite tu contraseña"
-                      placeholderTextColor="#6F8078"
+                      placeholderTextColor={colors.textMuted}
                       secureTextEntry
                       onFocus={() => setFocused("confirm")}
                       onBlur={() => setFocused("")}
@@ -136,7 +136,7 @@ export default function RegisterScreen({ navigation }) {
                   <TouchableOpacity
                     style={styles.primary}
                     activeOpacity={0.88}
-                    onPress={() => { clearWebFocus(); navigation.navigate("FoodRegister"); }}
+                    onPress={() => { clearWebFocus(); navigation.navigate("Home"); }}
                   >
                     <Text style={styles.primaryText}>Continuar</Text>
                     <Text style={styles.arrow}>→</Text>
@@ -170,7 +170,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     justifyContent: "center"
   },
-  shell: { width: "100%", maxWidth: 690, alignSelf: "center" },
+  shell: {
+    backgroundColor: "transparent", width: "100%", maxWidth: 690, alignSelf: "center" },
   shellDesktop: { maxWidth: 1210 },
   topBar: {
     flexDirection: "row",
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   back: { flexDirection: "row", alignItems: "center", gap: 7 },
-  backArrow: { color: colors.mint, fontSize: 19 },
-  backText: { color: "#8FA39A", fontSize: 10, fontWeight: "800" },
+  backArrow: { color: colors.textSoft, fontSize: 19 },
+  backText: { color: colors.textMuted, fontSize: 10, fontWeight: "800" },
   layout: { marginTop: 44, gap: 24 },
   layoutDesktop: {
     flexDirection: "row",
@@ -190,15 +191,15 @@ const styles = StyleSheet.create({
   intro: {},
   introDesktop: { flex: 1 },
   title: {
-    color: colors.text,
+    color: colors.cream,
     fontSize: 40,
     lineHeight: 45,
     fontWeight: "900",
     letterSpacing: -1.6,
     marginTop: 11
   },
-  titleDesktop: { fontSize: 57, lineHeight: 62 },
-  accent: { color: colors.mint },
+  titleDesktop: { fontSize: 57, lineHeight: 62, color: colors.cocoa },
+  accent: { color: colors.accent },
   description: {
     color: colors.textSoft,
     fontSize: 13,
@@ -216,54 +217,54 @@ const styles = StyleSheet.create({
     width: 51,
     height: 51,
     borderRadius: 15,
-    backgroundColor: "rgba(255,255,255,0.055)",
+    backgroundColor: colors.white10,
     borderWidth: 1,
     borderColor: colors.border,
     justifyContent: "center",
     alignItems: "center"
   },
-  stepActive: { backgroundColor: "rgba(131,230,177,0.11)", borderColor: "rgba(131,230,177,0.27)" },
-  stepNumber: { color: "#71847B", fontSize: 8.5, fontWeight: "900" },
-  stepNumberActive: { color: colors.mint, fontSize: 8.5, fontWeight: "900" },
-  stepLabel: { color: "#66766E", fontSize: 6.2, fontWeight: "900", letterSpacing: .7 },
-  stepLabelActive: { color: "#83BDA2", fontSize: 6.2, fontWeight: "900", letterSpacing: .7 },
-  stepLine: { flex: 1, height: 1, backgroundColor: "rgba(145,186,166,0.13)" },
+  stepActive: { backgroundColor: colors.primary, borderColor: colors.primary },
+  stepNumber: { color: colors.textMuted, fontSize: 8.5, fontWeight: "900" },
+  stepNumberActive: { color: colors.cream, fontSize: 8.5, fontWeight: "900" },
+  stepLabel: { color: colors.textMuted, fontSize: 6.2, fontWeight: "900", letterSpacing: .7 },
+  stepLabelActive: { color: colors.gold, fontSize: 6.2, fontWeight: "900", letterSpacing: .7 },
+  stepLine: { flex: 1, height: 1, backgroundColor: colors.border },
   infoCard: {
     maxWidth: 465,
     marginTop: 25,
     padding: 16,
     borderRadius: 18,
-    backgroundColor: "rgba(255,255,255,0.045)",
+    backgroundColor: colors.white10,
     borderWidth: 1,
     borderColor: colors.border
   },
-  infoKicker: { color: "#6FA389", fontSize: 7, fontWeight: "900", letterSpacing: 1.1 },
-  infoText: { color: "#788E84", fontSize: 9.5, lineHeight: 15, marginTop: 6 },
+  infoKicker: { color: colors.gold, fontSize: 7, fontWeight: "900", letterSpacing: 1.1 },
+  infoText: { color: colors.textSoft, fontSize: 9.5, lineHeight: 15, marginTop: 6 },
   card: {
     width: "100%",
     padding: 24,
     borderRadius: 28,
-    backgroundColor: "rgba(10,27,22,0.9)",
+    backgroundColor: colors.panel,
     borderWidth: 1,
     borderColor: colors.border
   },
   cardDesktop: { width: 465, padding: 31 },
   cardTitle: { color: colors.text, fontSize: 27, fontWeight: "900", marginTop: 7 },
-  cardSubtitle: { color: "#74877E", fontSize: 10.5, marginTop: 4, marginBottom: 11 },
-  label: { color: "#72847C", fontSize: 7.7, fontWeight: "900", letterSpacing: 1.05, marginTop: 12, marginBottom: 8 },
+  cardSubtitle: { color: colors.textMuted, fontSize: 10.5, marginTop: 4, marginBottom: 11 },
+  label: { color: colors.textMuted, fontSize: 7.7, fontWeight: "900", letterSpacing: 1.05, marginTop: 12, marginBottom: 8 },
   inputBox: {
     height: 52,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: "rgba(160,210,190,0.1)",
-    backgroundColor: "rgba(255,255,255,0.032)",
+    borderColor: colors.border,
+    backgroundColor: colors.white10,
     flexDirection: "row",
     alignItems: "center"
   },
-  focused: { borderColor: "rgba(131,230,177,0.48)", backgroundColor: "rgba(255,255,255,0.055)" },
+  focused: { borderColor: colors.primary, backgroundColor: colors.white15 },
   input: { flex: 1, color: colors.text, fontSize: 12.8, paddingHorizontal: 14 },
   show: { paddingHorizontal: 12 },
-  showText: { color: "#7FA58F", fontSize: 7, fontWeight: "900" },
+  showText: { color: colors.accent, fontSize: 7, fontWeight: "900" },
   primary: {
     height: 55,
     borderRadius: 16,
@@ -274,10 +275,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between"
   },
-  primaryText: { color: "#062017", fontSize: 13, fontWeight: "900" },
-  arrow: { color: "#062017", fontSize: 21, fontWeight: "800" },
-  note: { color: "#687A73", fontSize: 8.2, lineHeight: 13, textAlign: "center", marginTop: 13 },
+  primaryText: { color: colors.cocoa, fontSize: 13, fontWeight: "900" },
+  arrow: { color: colors.cocoa, fontSize: 21, fontWeight: "800" },
+  note: { color: colors.textMuted, fontSize: 8.2, lineHeight: 13, textAlign: "center", marginTop: 13 },
   footer: { marginTop: 25, flexDirection: "row", alignItems: "center", gap: 9 },
-  footerText: { color: "#6B8177", fontSize: 6.6, fontWeight: "900", letterSpacing: 1 },
-  footerLine: { flex: 1, height: 1, backgroundColor: "rgba(133,170,152,0.14)" }
+  footerText: { color: colors.textMuted, fontSize: 6.6, fontWeight: "900", letterSpacing: 1 },
+  footerLine: { flex: 1, height: 1, backgroundColor: "rgba(247,244,228,0.14)" }
 });
