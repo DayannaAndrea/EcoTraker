@@ -6,6 +6,7 @@ from .serializers import MealEntrySerializer, TripEntrySerializer
 from datetime import timedelta
 from django.utils import timezone
 from django.db.models import Sum
+from .tips import get_environmental_tip
 
 
 #vista para las comidas
@@ -86,3 +87,16 @@ class DashboardView(generics.GenericAPIView):
             'foodRecords': food_records,
             'travelRecords': travel_records,
         })
+
+class TipsView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        tip = get_environmental_tip(request.user)
+
+        if tip is None:
+            return Response({
+                'message': 'No hay registros suficientes para generar un tip.'
+            })
+
+        return Response(tip)
