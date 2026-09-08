@@ -7,6 +7,8 @@ from datetime import timedelta
 from django.utils import timezone
 from django.db.models import Sum
 from .tips import get_environmental_tip
+from django.contrib.auth.models import User
+from .serializers import MealEntrySerializer, TripEntrySerializer, RankingSerializer 
 
 
 #vista para las comidas
@@ -100,3 +102,43 @@ class TipsView(generics.GenericAPIView):
             })
 
         return Response(tip)
+
+#vista para el ranking 
+class RankingView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        today = timezone.localdate()
+        start_date = today - timedelta(days=6)
+
+        ranking = []
+
+        users = User.objects.all()
+
+        for user in users:
+            food_total = MealEntry.objects.filter(
+                user=user,
+                created_at__date__range=[start_date, today]
+            ).aggregate(
+                total=Sum('co2_impact')
+            )['total'] or 0
+
+            travel_total = TripEntry.objects.filter(
+                user=user,
+                date__range=[start_date, today]
+            ).aggregate(
+                total=Sum('co2_impact')
+            )['total'] or 0
+
+            weekly_footprint = food_total + travel_total
+
+            ranking.append({
+                'username': user.username,
+                'weekly_footprint': weekly_footprint
+            })
+
+        ranking.sort(key=lambda user: user['weekly_footprint'])
+
+        serializer = RankingSerializer(ranking, many=True)
+
+        return Response(serializer.data)

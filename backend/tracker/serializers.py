@@ -53,3 +53,9 @@ class TripEntrySerializer(serializers.ModelSerializer):
             co2_impact=co2_impact,
             **validate_data
         )
+
+
+#serializer de los rankings
+class RankingSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    weekly_footprint = serializers.FloatField()
