@@ -8,6 +8,7 @@ import ProfessionalChart from "../components/ProfessionalChart";
 import { colors } from "../theme/colors";
 import { clearWebFocus } from "../utils/webFocus";
 import { useImpact } from "../context/ImpactContext";
+import TipCard from "../components/TipCard";
 import { buildImpactChart } from "../utils/dashboardData";
 
 export default function HomeScreen({ navigation }) {
@@ -18,6 +19,56 @@ export default function HomeScreen({ navigation }) {
 
   const chart = useMemo(() => buildImpactChart(allRecords, period), [allRecords, period]);
   const peak = chart.reduce((best, point) => point.value > best.value ? point : best, { label: "--", value: 0 });
+  const FOOD_TIP_THRESHOLD = 14;
+  const TRAVEL_TIP_THRESHOLD = 5;
+
+  const tipRecommendations = useMemo(() => {
+    const now = new Date();
+    const cutoff = new Date(now);
+    cutoff.setDate(cutoff.getDate() - 7);
+
+    const recentFood = foodRecords.filter(record => {
+      const date = new Date(record.createdAt);
+      return !Number.isNaN(date.getTime()) && date >= cutoff && date <= now;
+    });
+
+    const recentTravel = travelRecords.filter(record => {
+      const date = new Date(record.createdAt);
+      return !Number.isNaN(date.getTime()) && date >= cutoff && date <= now;
+    });
+
+    const foodImpact7Days = recentFood.reduce(
+      (sum, record) => sum + Number(record.co2 || 0),
+      0
+    );
+
+    const travelImpact7Days = recentTravel.reduce(
+      (sum, record) => sum + Number(record.co2 || 0),
+      0
+    );
+
+    const recommendations = [];
+
+    if (foodImpact7Days > FOOD_TIP_THRESHOLD) {
+      recommendations.push({
+        key: "food",
+        category: "alimentación",
+        impact: foodImpact7Days,
+        tip: "Prioriza más comidas de origen vegetal durante la semana y reduce las porciones de alimentos con mayor huella de carbono."
+      });
+    }
+
+    if (travelImpact7Days > TRAVEL_TIP_THRESHOLD) {
+      recommendations.push({
+        key: "travel",
+        category: "transporte",
+        impact: travelImpact7Days,
+        tip: "Prioriza caminar, usar bicicleta o transporte público en trayectos cortos para reducir tu huella de carbono."
+      });
+    }
+
+    return recommendations;
+  }, [foodRecords, travelRecords]);
 
   return (
     <AnimatedBackground>
@@ -89,6 +140,10 @@ export default function HomeScreen({ navigation }) {
               </View>
               <ProfessionalChart data={chart} />
             </View>
+
+            {tipRecommendations.map(recommendation => (
+              <TipCard key={recommendation.key} recommendation={recommendation} />
+            ))}
 
             <View style={styles.periods}>
               {["Hoy", "Semana", "Mes"].map(item => (
