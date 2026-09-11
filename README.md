@@ -37,4 +37,4 @@ npm run web
 
 Expo muestra la URL local, normalmente `http://localhost:8081`. Para usar Expo Go, escanea el QR que aparece en la terminal.
 
-Configura `backend/.env` y `mobile/.env` a partir de los archivos `.env.example` cuando necesites valores locales.
+Configura `backend/.env` y `mobile/.env` a partir de los archivos `.env.example` cuando necesites valores locales. Para probar el registro sin instalar PostgreSQL, usa `DJANGO_DB_ENGINE=sqlite` en `backend/.env`; después ejecuta `python manage.py migrate` y vuelve a iniciar el backend.
